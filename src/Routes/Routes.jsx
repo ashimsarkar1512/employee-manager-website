@@ -7,6 +7,8 @@ import JoinEmployee from "../Pages/JoinEmployee/JoinEmployee";
 import Register from "../Pages/Register/Register";
 import Dashboard from "../Layout/Dashboard";
 import AddAsset from "../Pages/Dashboard/AddAsset/AddAsset";
+import HrHome from "../Pages/Dashboard/HrHome/HrHome";
+import AssetList from "../Pages/Dashboard/AssetList/AssetList";
 
 
  export const router = createBrowserRouter([
@@ -38,11 +40,11 @@ import AddAsset from "../Pages/Dashboard/AddAsset/AddAsset";
               children:[
                 {
                   path:'home',
-                  element: <AddAsset></AddAsset>  
+                  element: <HrHome></HrHome>  
                 },
                 {
                   path:'assetList',
-                  element: <AddAsset></AddAsset>  
+                  element: <AssetList></AssetList>  
                 },
                 {
                   path:'addAsset',
