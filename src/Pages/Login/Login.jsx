@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; 
 
 
 const Login = () => {
@@ -66,20 +66,20 @@ const Login = () => {
             return (
                         <div>
                                     <div className='flex mb-52 flex-col lg:flex-row '>
-                        <div className='w-[80%] mx-auto lg:w-[50%] mt-20 '>
+                        <div className='w-[80%] mx-auto lg:w-[50%] mt-32 '>
                             <h1 className="text-2xl font-bold text-center text-green-500 my-5">Log in to your account</h1>
                             <div className='w-full lg:w-[75%] mx-auto '>
                                 <form onSubmit={handleLogin}  className='space-y-10'>
                                     <input className='block w-full rounded outline-none border-b-2 focus:border-orange-500 p-4' type="email" name="email" id="" placeholder='Email' required />
                                     <input className='block w-full rounded outline-none border-b-2 focus:border-orange-500 p-4' type="password" name="password" id="" placeholder='Password' required />
-                                    <button className='btn w-full text-white bg-green-600 '>Log in</button>
+                                    <button className='btn w-full text-white text-xl  bg-green-600 '>Log in</button>
                                 </form>
                                 < hr className='my-5' />
-                                <span className="absolute lg:right-1/3 lg:top-[56%]  right-[15%] top-[173%]"  onClick={()=>setShowPassword(!showPassword)}>
-                             {
-                              showPassword? <FaEyeSlash ></FaEyeSlash>:<FaEye ></FaEye>
-                             }
-                            </span>
+                                <span className="absolute lg:right-1/3 lg:top-[63%]  right-[15%] top-[143%]" onClick={()=>setShowPassword(!showPassword)}>
+                {
+                   showPassword? <FaEyeSlash></FaEyeSlash>:<FaEye ></FaEye>
+                }
+                </span>
             
                             </div>
                            <div className="text-5xl flex gap-10 ml-28 lg:ml-64 md:ml-64">

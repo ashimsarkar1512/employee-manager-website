@@ -15,10 +15,12 @@ const Navbar = () => {
              <li ><NavLink  className={({ isActive }) => (isActive ? 'text-xl text-orange-500 font-medium' : 'text-xl')} to='/'>Home</NavLink></li>
              <li ><NavLink  className={({ isActive }) => (isActive ? 'text-xl text-orange-500 font-medium' : 'text-xl')} to='/employee'>Join Us Employee</NavLink></li>
              <li ><NavLink  className={({ isActive }) => (isActive ? 'text-xl text-orange-500 font-medium' : 'text-xl')} to='manager'>Join Us HR Manager</NavLink></li>
+             <li ><NavLink  className={({ isActive }) => (isActive ? 'text-xl text-orange-500 font-medium' : 'text-xl')} to='dashboard'>Navbar</NavLink></li>
+
              
             </>
             return (
-                        <div className="navbar bg-base-100">
+                        <div className="navbar fixed z-10 bg-opacity-30 bg-black text-white max-w-screen-xl ">
                         <div className="navbar-start">
                           <div className="dropdown">
                             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
