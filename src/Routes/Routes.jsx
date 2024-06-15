@@ -7,8 +7,15 @@ import JoinEmployee from "../Pages/JoinEmployee/JoinEmployee";
 import Register from "../Pages/Register/Register";
 import Dashboard from "../Layout/Dashboard";
 import AddAsset from "../Pages/Dashboard/AddAsset/AddAsset";
+import AllRequest from "../Pages/Dashboard/AllRequest/AllRequest";
+import CustomRequestList from "../Pages/Dashboard/CustomRequestList/CustomRequestList";
+import MyEmployeeList from "../Pages/Dashboard/MyEmployeeList/MyEmployeeList";
+import addEmployee from "../Pages/Dashboard/AddEmployee/AddEmployee";
 import HrHome from "../Pages/Dashboard/HrHome/HrHome";
 import AssetList from "../Pages/Dashboard/AssetList/AssetList";
+import UpdateAsset from "../Pages/Dashboard/UpdateAsset/UpdateAsset";
+import JoinManager from "../Pages/JoinManager/JoinManager";
+import AddEmployee from "../Pages/Dashboard/AddEmployee/AddEmployee";
 
 
  export const router = createBrowserRouter([
@@ -31,6 +38,10 @@ import AssetList from "../Pages/Dashboard/AssetList/AssetList";
                          {
                           path:'/employee',
                           element:<JoinEmployee></JoinEmployee>
+                         },
+                         {
+                          path:'/manager',
+                          element:<JoinManager></JoinManager>
                          }
               ]
             },
@@ -49,7 +60,28 @@ import AssetList from "../Pages/Dashboard/AssetList/AssetList";
                 {
                   path:'addAsset',
                   element: <AddAsset></AddAsset>  
-                }
+                },
+                {
+                  path:'request',
+                  element:<AllRequest></AllRequest> 
+                },
+                {
+                  path:'customRequest',
+                  element: <CustomRequestList></CustomRequestList> 
+                },
+                {
+                  path:'myEmployeeList',
+                  element: <MyEmployeeList></MyEmployeeList>  
+                },
+                {
+                  path:'addEmployee',
+                  element:<AddEmployee></AddEmployee>  
+                },
+                {
+                  path:'updateAssets/:id',
+                  element:<UpdateAsset></UpdateAsset>,
+                  loader:({params})=> fetch(`http://localhost:5000/assets/${params.id}`)
+                },
               ]
             }
           

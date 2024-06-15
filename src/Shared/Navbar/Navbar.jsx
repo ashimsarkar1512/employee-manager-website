@@ -14,7 +14,7 @@ const Navbar = () => {
             const navLinks=<>
              <li ><NavLink  className={({ isActive }) => (isActive ? 'text-xl text-orange-500 font-medium' : 'text-xl')} to='/'>Home</NavLink></li>
              <li ><NavLink  className={({ isActive }) => (isActive ? 'text-xl text-orange-500 font-medium' : 'text-xl')} to='/employee'>Join Us Employee</NavLink></li>
-             <li ><NavLink  className={({ isActive }) => (isActive ? 'text-xl text-orange-500 font-medium' : 'text-xl')} to='manager'>Join Us HR Manager</NavLink></li>
+             <li ><NavLink  className={({ isActive }) => (isActive ? 'text-xl text-orange-500 font-medium' : 'text-xl')} to='/manager'>Join Us HR Manager</NavLink></li>
              <li ><NavLink  className={({ isActive }) => (isActive ? 'text-xl text-orange-500 font-medium' : 'text-xl')} to='dashboard'>Navbar</NavLink></li>
 
              
