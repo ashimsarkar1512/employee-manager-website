@@ -7,6 +7,8 @@ import { VscRequestChanges } from "react-icons/vsc";
 import { MdDashboardCustomize } from "react-icons/md";
 import { IoIosListBox } from "react-icons/io";
 import { IoIosPersonAdd } from "react-icons/io";
+import { FaHome } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 const Dashboard = () => {
             return (
                         <div className="flex p-3">
@@ -35,8 +37,15 @@ const Dashboard = () => {
                                            <NavLink to='/dashboard/addEmployee'> <IoIosPersonAdd></IoIosPersonAdd> Add An Employee</NavLink>
                                                 </li>
 
+                                             <div className="text-xl">
+                                             <div className="divider"></div>
+                                                <li><NavLink to='/'><FaHome></FaHome> Home</NavLink></li>
+                                                <li><NavLink to='/profile'><CgProfile></CgProfile> profile</NavLink></li>
+                                             </div>
+                                                
+
                                     </ul>
-                                    
+                                   
                                  </div> 
 
                                  <div className="flex-1 p-6">
