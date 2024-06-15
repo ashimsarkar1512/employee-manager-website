@@ -40,7 +40,7 @@ const Register = () => {
                             Swal.fire({
                               position: "top-end",
                               icon: "success",
-                              title: "update successfully",
+                              title: "user created successfully",
                               showConfirmButton: false,
                               timer: 1500
                             });
