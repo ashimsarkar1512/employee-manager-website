@@ -12,7 +12,7 @@ const AssetList = () => {
        const axiosSecure=UseAxiosSecure()
         
 
-       const handleDeleteItem=(item)=>{
+       const handleDeleteItem=id=>{
               Swal.fire({
                           title: "Are you sure?",
                           text: "You won't be able to revert this!",
@@ -23,14 +23,14 @@ const AssetList = () => {
                           confirmButtonText: "Yes, delete it!"
                         }).then(async (result) => {
                           if (result.isConfirmed) {
-                                      const res=await axiosSecure.delete(`/assets/${item._id}`)
+                                      const res=await axiosSecure.delete(`/assets/${id}`)
                                       // console.log(res.data);
                                       if(res.data.deletedCount>0){
                                                  refetch()
                                                   Swal.fire({
                                                               position: "top-end",
                                                               icon: "success",
-                                                              title:`${item.name} has been deleted`,
+                                                              title:"hjdsfs",
                                                               showConfirmButton: false,
                                                               timer: 1500
                                                             });
@@ -98,7 +98,7 @@ className="btn btn-ghost btn-lg bg-orange-500">
 </td>
 
 <button
-                                                     onClick={()=>handleDeleteItem(item)}
+                                                     onClick={()=>handleDeleteItem(item._id)}
                                                      className="btn btn-ghost btn-lg"><FaTrashAlt className="text-red-600"></FaTrashAlt></button>
                                                                            
 </tr>

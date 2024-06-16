@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "./useAxiosPublic";
+
+import UseAxiosSecure from "./UseAxiosSecure";
 
 
 const useAsset = () => {
-            const axiosPublic=useAxiosPublic()
+            const axiosSecure=UseAxiosSecure()
            
             const {data:assets =[],isPending:loading,refetch}=useQuery({
                 queryKey:['menu'],
                 queryFn:async ()=>{
-                    const res=await axiosPublic.get('/assets')
+                    const res=await axiosSecure.get('/assets')
                     return res.data
                 }
             })

@@ -16,6 +16,8 @@ import AssetList from "../Pages/Dashboard/AssetList/AssetList";
 import UpdateAsset from "../Pages/Dashboard/UpdateAsset/UpdateAsset";
 import JoinManager from "../Pages/JoinManager/JoinManager";
 import AddEmployee from "../Pages/Dashboard/AddEmployee/AddEmployee";
+import RequestAssets from "../Pages/Dashboard/RequestAssets/RequestAssets";
+import MyAssets from "../Pages/Dashboard/MyAssets/MyAssets";
 
 
  export const router = createBrowserRouter([
@@ -82,6 +84,15 @@ import AddEmployee from "../Pages/Dashboard/AddEmployee/AddEmployee";
                   element:<UpdateAsset></UpdateAsset>,
                   loader:({params})=> fetch(`http://localhost:5000/assets/${params.id}`)
                 },
+
+                {
+                  path:"requestAssets",
+                  element:<RequestAssets></RequestAssets>
+                },
+                {
+                  path:"myAssets",
+                  element:<MyAssets></MyAssets>
+                }
               ]
             }
           
