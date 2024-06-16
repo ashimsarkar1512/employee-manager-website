@@ -57,8 +57,9 @@ const AssetList = () => {
 <tr className="text-xl">
 
 <th>#</th>
-<th>Image</th>
-<th>ItemName</th>
+<th>Name</th>
+<th>Type</th>
+<th> quantity</th>
 <th>Date</th>
 <th>Update</th>
 <th>Delete</th>
@@ -72,18 +73,14 @@ assets.map((item,index)=><tr key={item._id}>
 </td>
 
 
-<td>
-<div className="flex items-center gap-3">
-  
-<div className="avatar">
-<div className="mask mask-squircle w-12 h-12">
-<img src={item.image} alt="Avatar Tailwind CSS Component" />
-</div>
-</div>
 
-</div>
-</td>
 <td>{item.name}</td>
+<td>
+ {item.type}
+</td>
+<td>
+ {item.quantity}
+</td>
 <td>
  {item.date}
 </td>

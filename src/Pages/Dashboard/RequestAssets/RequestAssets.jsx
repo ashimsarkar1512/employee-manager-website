@@ -1,13 +1,67 @@
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 
 const RequestAssets = () => {
+
+            const axiosPublic=useAxiosPublic()
+
+
+            const handleRequest=async e=>{
+                        e.preventDefault();
+                        const form=e.target;
+                        const name=form.name.value;
+                        const type=form.type.value;
+                        const availability=form.availability.value
+                       
+                       
+
+
+                        try{
+                                 
+                                    const requestAssets={
+                                                name,
+                                                type,
+                                                availability
+                                                
+                                              
+                                    }
+                                    
+                                 
+                               
+                                    axiosPublic.post('/employee',requestAssets)
+                                    .then(res=>{
+                                                console.log(res.data);
+                                                if(res.data.insertedId){
+                                                          
+                                                            Swal.fire({
+                                                                        position: "top-end",
+                                                                        icon: "success",
+                                                                        title: " asset is added",
+                                                                        showConfirmButton: false,
+                                                                        timer: 1500
+                                                                      });
+                                                }
+                                    })
+                        }catch(err){
+                                    console.log(err);
+                        }
+                        
+
+
+                        
+             }
+
+
+
+
             return (
                         <div>
 
                         <h2 className="text-3xl text-center mt-16">Add An Assets</h2>
 <section className=" max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md mt-10 dark:bg-gray-800">
 
-<form>
+<form onSubmit={handleRequest}>
 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
 <div>
    <label className="text-gray-700 dark:text-gray-200" >Assets Name</label>
@@ -28,7 +82,7 @@ const RequestAssets = () => {
 <label className="label">
  <span className="label-text text-gray-700 dark:text-gray-200">Availability</span>
 </label>
-   <select className="select  w-full max-w-xs" name="type">
+   <select className="select  w-full max-w-xs" name="availability">
  <option disabled selected>Availability</option>
     <option>Available</option>
         <option>Out of Stock</option>

@@ -1,9 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import { imageUpload } from "../../../api/utils";
 import Swal from "sweetalert2";
 import { useLoaderData } from "react-router-dom";
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css"
 
 
 const UpdateAsset = () => {
@@ -14,6 +16,13 @@ const UpdateAsset = () => {
             const {user}=useContext(AuthContext)
             const axiosSecure=UseAxiosSecure()
 
+            const[startDate,setStartDate]=useState(new Date())
+           
+            const onchangeHandler=e=>{
+                console.log(e);
+                setStartDate(e)
+            }
+
            
              const handleSubmit=async e=>{
                         e.preventDefault();
@@ -21,7 +30,7 @@ const UpdateAsset = () => {
                         const name=form.name.value;
                         const type=form.type.value;
                         const quantity=form.quantity.value;
-                        const image=form.image.files[0]
+                      
                         const manager={
                                     name:user?.displayName,
                                     image:user?.photoURL,
@@ -31,13 +40,13 @@ const UpdateAsset = () => {
 
 
                         try{
-                                    const image_url=await imageUpload(image)
+                                   
                                     const addAsset={
                                                 name,
                                                 type,
                                                 quantity,
                                                 manager,
-                                                image:image_url
+                                               
                                     }
                                     
                                  
@@ -91,9 +100,12 @@ const UpdateAsset = () => {
                <input id="quantity" type="text" name="quantity" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"/>
            </div>
            <div>
-           <label className="text-gray-700 dark:text-gray-200" >Product image</label>
-               <input id="image" type="file" name="image" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"/>
-           </div>
+
+<label className="label">
+                            <span className="label-text text-gray-700 dark:text-gray-200">Date Of Birth</span>
+                        </label>
+    <DatePicker selected={startDate} onChange={onchangeHandler} className="input input-bordered w-full"></DatePicker>
+</div>
 
            
        </div>
