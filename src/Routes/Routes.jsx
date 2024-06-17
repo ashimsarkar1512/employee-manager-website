@@ -8,7 +8,7 @@ import Register from "../Pages/Register/Register";
 import Dashboard from "../Layout/Dashboard";
 import AddAsset from "../Pages/Dashboard/AddAsset/AddAsset";
 import AllRequest from "../Pages/Dashboard/AllRequest/AllRequest";
-import CustomRequestList from "../Pages/Dashboard/CustomRequestList/CustomRequestList";
+
 import MyEmployeeList from "../Pages/Dashboard/MyEmployeeList/MyEmployeeList";
 
 import HrHome from "../Pages/Dashboard/HrHome/HrHome";
@@ -20,6 +20,7 @@ import RequestAssets from "../Pages/Dashboard/RequestAssets/RequestAssets";
 
 import MyRequestAssets from "../Pages/Dashboard/MyRequestAssets/MyRequestAssets";
 import MyTeam from "../Pages/Dashboard/MyTeam/MyTeam";
+import Profile from "../Pages/Profile/Profile";
 
 
  export const router = createBrowserRouter([
@@ -31,6 +32,7 @@ import MyTeam from "../Pages/Dashboard/MyTeam/MyTeam";
                                     path:'/',
                                     element:<Home></Home>
                         },
+                       
                         {
                           path:'/login',
                           element:<Login></Login>
@@ -69,10 +71,7 @@ import MyTeam from "../Pages/Dashboard/MyTeam/MyTeam";
                   path:'request',
                   element:<AllRequest></AllRequest> 
                 },
-                {
-                  path:'customRequest',
-                  element: <CustomRequestList></CustomRequestList> 
-                },
+              
                 {
                   path:'myEmployeeList',
                   element: <MyEmployeeList></MyEmployeeList>  
@@ -98,7 +97,12 @@ import MyTeam from "../Pages/Dashboard/MyTeam/MyTeam";
                 {
                   path:"myTeam",
                   element:<MyTeam></MyTeam>
+                },
+                {
+                  path:"profile",
+                  element:<Profile></Profile>
                 }
+              
               ]
             }
           

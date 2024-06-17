@@ -1,15 +1,34 @@
 
 import { Link } from "react-router-dom";
-import useAsset from "../../../Hooks/useAsset";
+
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
+import {  useEffect, useState } from "react";
+// import useAsset from "../../../Hooks/useAsset"
+
 
 const AssetList = () => {
-       const [assets,refetch]=useAsset()
+      //  const [refetch]=useAsset()
+       const [services, setServices] = useState([]);
+       const[asc,setAsc]=useState(true)
+       const [search,setSearch]=useState('')
+       const [filter, setFilter] = useState('');
+       console.log(filter);
+      
+      
 
        const axiosSecure=UseAxiosSecure()
+
+       useEffect(() => {
+
+            axiosSecure(`/assets?sort=${asc?'asc':'desc'}&search=${search}&filter=${filter}`)
+            .then(res=>setServices(res.data))
+    }, [asc,search,filter])
+
+
+      
         
 
        const handleDeleteItem=id=>{
@@ -26,7 +45,7 @@ const AssetList = () => {
                                       const res=await axiosSecure.delete(`/assets/${id}`)
                                       // console.log(res.data);
                                       if(res.data.deletedCount>0){
-                                                 refetch()
+                                                //  refetch()
                                                   Swal.fire({
                                                               position: "top-end",
                                                               icon: "success",
@@ -41,13 +60,44 @@ const AssetList = () => {
 
   }
 
-
+  const handleSearch=e=>{
+    e.preventDefault();
+    const search=e.target.search.value;
+    console.log(search);
+    setSearch(search)
+}
 
 
 
 
             return (
               <div>
+                <div className="flex gap-5 justify-center my-8">
+                  <form onSubmit={handleSearch}>
+                    <input className="py-2 border-2" type="text" name="search" />
+                    <input type="submit" value="search"className="btn" />
+                  </form>
+                  <button className="btn btn-secondary"
+                  onClick={()=>setAsc(!asc)}
+                  >
+                    {asc?'Quantity:High to Low':'Quantity:Low to High'}
+                  </button>
+
+                  <select onChange={e => {
+          setFilter(e.target.value)
+        }}
+          value={filter}
+
+          className="select select-bordered " placeholder="type"
+          name="type" id="" >
+
+          <option disabled selected>Product type</option>
+          
+          <option >returnable</option>
+          <option >non-returnable</option>
+
+        </select>
+                </div>
 
             
               <div className="overflow-x-auto">
@@ -67,7 +117,7 @@ const AssetList = () => {
 </thead>
 <tbody>
 {
-assets.map((item,index)=><tr key={item._id}>
+services.map((item,index)=><tr key={item._id}>
 <td>
               {index+1}
 </td>

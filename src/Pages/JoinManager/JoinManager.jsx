@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import {  useContext, useState } from "react";
 
 
 import DatePicker from 'react-datepicker'
@@ -7,10 +7,12 @@ import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 import { imageUpload } from "../../api/utils";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const JoinManager = () => {
 
     const axiosSecure=UseAxiosSecure()
+    const{createUser,updateUserProfile}=useContext(AuthContext)
 
 
       const[startDate,setStartDate]=useState(new Date())
@@ -26,28 +28,47 @@ const JoinManager = () => {
                               const form=event.target;
                               const name=form.name.value;
                               const email=form.email.value;
+                              const logo=form.logo.value;
+                             
                               const password=form.password.value;
-                              const logo=form.logo.files[0]
-                              const image=form.image.files[0]
+                            //   const logo = form.logo.files[0];
+                              const image = form.image.files[0];
                           
                               const date=startDate;
 
-                               
+                              createUser(email,password)
+                              .then((result)=>{
+                               updateUserProfile(result.user,{
+                                 displayName:name,
+                                 photoURL:image
+                             })
+                            })
+                            .catch(error=>{
+                             console.error(error)
+                             
+                            })
+
                               
                               try{
-                                const logo_url=await imageUpload(logo)
+                                // const logo_url=await imageUpload(logo)
                                 const image_url=await imageUpload(image)
                                 const setManager={
                                             name,
                                             email,
                                             password,
-                                            logo:logo_url,
+                                            // logo:logo_url,
                                             image:image_url,
+                                             logo,
                                             date
+
+
+
+
 
                                             
                                           
                                 }
+                                
                                 
                                 console.log(setManager)
                              
@@ -60,7 +81,7 @@ const JoinManager = () => {
                                                         Swal.fire({
                                                                     position: "top-end",
                                                                     icon: "success",
-                                                                    title: " asset is added",
+                                                                    title: " Sign up HR",
                                                                     showConfirmButton: false,
                                                                     timer: 1500
                                                                   });
@@ -101,7 +122,7 @@ const JoinManager = () => {
             </div>
             <div>
            <label className="text-gray-700 dark:text-gray-200" >company logo</label>
-               <input id="image" type="file" name="logo" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"/>
+               <input  type="text" name="logo" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"/>
            </div>
             <div>
            <label className="text-gray-700 dark:text-gray-200" >profile picture</label>

@@ -4,7 +4,7 @@ import { IoMdHome } from "react-icons/io";
 import { FaTableList } from "react-icons/fa6";
 import { MdAssignmentAdd } from "react-icons/md";
 import { VscRequestChanges } from "react-icons/vsc";
-import { MdDashboardCustomize } from "react-icons/md";
+
 import { IoIosListBox } from "react-icons/io";
 import { IoIosPersonAdd } from "react-icons/io";
 import { FaHome } from "react-icons/fa";
@@ -65,7 +65,7 @@ const Dashboard = () => {
                                              <div className="text-xl">
                                              <div className="divider"></div>
                                                 <li><NavLink to='/'><FaHome></FaHome> Home</NavLink></li>
-                                                <li><NavLink to='/profile'><CgProfile></CgProfile> profile</NavLink></li>
+                                                <li><NavLink to='/dashboard/profile'><CgProfile></CgProfile> profile</NavLink></li>
                                              </div>
                                                 
 
