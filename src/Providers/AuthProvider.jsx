@@ -2,6 +2,7 @@ import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStat
 
 import { createContext, useEffect, useState } from "react";
 import { app } from "../firebase/firebase.config";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const AuthContext= createContext(null)
 
@@ -12,6 +13,7 @@ const auth = getAuth(app);
 const AuthProvider = ({children}) => {
             const [user,setUser] =useState(null)
             const [loading,setLoading]=useState(true)
+            const axiosPublic=useAxiosPublic()
 
             const createUser=(email,password)=>{
                           setLoading(true)
@@ -50,12 +52,25 @@ const AuthProvider = ({children}) => {
                         const unSubscribe =  onAuthStateChanged(auth,currentUser=>{
                              console.log('user in the on state chance',currentUser);
                              setUser(currentUser)
-                             setLoading(false)
+                             if(currentUser){
+                              const userInfo={email:currentUser.email}
+                              axiosPublic.post('/jwt',userInfo)
+                              .then(res=>{
+                                if(res.data.token){
+                                  localStorage.setItem('access-token',res.data.token)
+                                  setLoading(false)
+                                }
+                              })
+                            }
+                            else{
+                              localStorage.removeItem('access-token')
+                              setLoading(false)
+                            }
                           })
                           return()=>{
                              unSubscribe();
                           }
-                         },[])
+                         },[axiosPublic])
 
                         
           

@@ -7,7 +7,7 @@ const useAssetsRequest = () => {
             const axiosPublic=useAxiosPublic()
                          
             const {data:assetsRequest =[],isPending:loading,refetch}=useQuery({
-                        queryKey:['menu'],
+                        queryKey:['assetsRequest'],
                         queryFn:async ()=>{
                             const res=await axiosPublic.get('/employee')
                             return res.data

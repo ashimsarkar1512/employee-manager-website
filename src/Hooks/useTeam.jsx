@@ -7,7 +7,7 @@ const useTeam = () => {
             const axiosPublic=useAxiosPublic()
                          
             const {data:myTeam =[]}=useQuery({
-                        queryKey:['menu'],
+                        queryKey:['myTeam'],
                         queryFn:async ()=>{
                             const res=await axiosPublic.get('/users')
                             return res.data

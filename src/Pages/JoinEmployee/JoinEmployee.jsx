@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import {  useContext, useRef, useState } from "react";
 
 
 import DatePicker from 'react-datepicker'
@@ -7,20 +7,21 @@ import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { imageUpload } from "../../api/utils";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { updateProfile } from "firebase/auth";
 
 
 
 const JoinEmployee = () => {
     const axiosPublic=useAxiosPublic()
 
-    // const navigate=useNavigate()
-   
-    const[startDate,setStartDate]=useState(new Date())
-                
+    const { createUser } = useContext(AuthContext);
+    const [startDate, setStartDate] = useState(new Date());
+    const formRef = useRef(null);
 
-    const onchangeHandler=e=>{
+    const onchangeHandler = e => {
         console.log(e);
-        setStartDate(e)
+        setStartDate(e);
     }
 
             const handleSignUp= async event=>{
@@ -33,7 +34,14 @@ const JoinEmployee = () => {
                             const image=form.image.files[0]
                             
                             try{
-                                const image_url=await imageUpload(image)
+                                const result = await createUser(email, password);
+            const image_url = await imageUpload(image);
+
+           
+            await updateProfile(result.user, {
+                displayName: name,
+                photoURL: image_url
+            });
                                 const setEmployee={
                                             name,
                                           email,
@@ -45,26 +53,24 @@ const JoinEmployee = () => {
                                 
                              
                            
-                                axiosPublic.post('/users',setEmployee)
-                                .then(res=>{
-                                            console.log(res.data);
-                                            if(res.data.insertedId){
-
-                                                      
-                                                        Swal.fire({
-                                                                    position: "top-end",
-                                                                    icon: "success",
-                                                                    title: " Employee is added",
-                                                                    showConfirmButton: false,
-                                                                    timer: 1500
-                                                                  });
-                                            }
-                                })
-                    }catch(err){
-                                console.log(err);
-                    }
-                    
-                        }
+                             
+            const res = await axiosPublic.post('/users', setEmployee);
+            console.log(res.data);
+            if (res.data.insertedId) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Sign up Employee",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                formRef.current.reset();
+                setStartDate(new Date()); 
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
 
                        

@@ -27,11 +27,12 @@ const Register = () => {
               .then(result =>{
                           const loggedUser=result.user;
                           console.log(loggedUser);
-                          updateUserProfile(data.name,data.photoURL)
+                          updateUserProfile(data.name,data.photoURL,data.email)
                           .then(()=>{
                              const userInfo={
-                              name:data.name,
-                              email:data.email
+                              displayName:data.name,
+                             photoURL:data.photoURL,
+                             email:data.email
                              }
                             axiosPublic.post('/users',userInfo)
                             .then(res=>{

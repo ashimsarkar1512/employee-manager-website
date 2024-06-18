@@ -12,9 +12,10 @@ import { CgProfile } from "react-icons/cg";
 import { AiOutlineTeam } from "react-icons/ai";
 
 import { MdPostAdd } from "react-icons/md";
+import useHr from "../Hooks/useHr";
 // import { VscRequestChanges } from "react-icons/vsc";
 const Dashboard = () => {
-     const isHr=true
+     const [isHr]=useHr()
             return (
                         <div className="flex ">
                                 <div className="w-64 min-h-screen bg-orange-400 ">

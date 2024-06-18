@@ -1,4 +1,4 @@
-import {  useContext, useState } from "react";
+import {  useContext, useRef, useState } from "react";
 
 
 import DatePicker from 'react-datepicker'
@@ -8,91 +8,70 @@ import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 import { imageUpload } from "../../api/utils";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { updateProfile } from "firebase/auth";
 
 const JoinManager = () => {
 
-    const axiosSecure=UseAxiosSecure()
-    const{createUser,updateUserProfile}=useContext(AuthContext)
+    const axiosSecure = UseAxiosSecure();
+    const { createUser } = useContext(AuthContext);
+    const [startDate, setStartDate] = useState(new Date());
+    const formRef = useRef(null);
 
+    const onchangeHandler = e => {
+        console.log(e);
+        setStartDate(e);
+    }
 
-      const[startDate,setStartDate]=useState(new Date())
-                
+    const handleHrSignUp = async event => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const logo = form.logo.value;
+        const password = form.password.value;
+        const image = form.image.files[0];
+        const date = startDate;
 
-      const onchangeHandler=e=>{
-          console.log(e);
-          setStartDate(e)
-      }
-  
-              const handleHrSignUp= async event=>{
-                          event.preventDefault()
-                              const form=event.target;
-                              const name=form.name.value;
-                              const email=form.email.value;
-                              const logo=form.logo.value;
-                             
-                              const password=form.password.value;
-                            //   const logo = form.logo.files[0];
-                              const image = form.image.files[0];
-                          
-                              const date=startDate;
+        try {
+           
+            const result = await createUser(email, password);
+            const image_url = await imageUpload(image);
 
-                              createUser(email,password)
-                              .then((result)=>{
-                               updateUserProfile(result.user,{
-                                 displayName:name,
-                                 photoURL:image
-                             })
-                            })
-                            .catch(error=>{
-                             console.error(error)
-                             
-                            })
+           
+            await updateProfile(result.user, {
+                displayName: name,
+                photoURL: image_url
+            });
 
-                              
-                              try{
-                                // const logo_url=await imageUpload(logo)
-                                const image_url=await imageUpload(image)
-                                const setManager={
-                                            name,
-                                            email,
-                                            password,
-                                            // logo:logo_url,
-                                            image:image_url,
-                                             logo,
-                                            date
+            const setManager = {
+                name,
+                email,
+                password,
+                logo,
+                image: image_url,
+                date
+            };
 
+            console.log(setManager);
 
-
-
-
-                                            
-                                          
-                                }
-                                
-                                
-                                console.log(setManager)
-                             
-                           
-                                axiosSecure.post('/users',setManager)
-                                .then(res=>{
-                                            console.log(res.data);
-                                            if(res.data.insertedId){
-                                                      
-                                                        Swal.fire({
-                                                                    position: "top-end",
-                                                                    icon: "success",
-                                                                    title: " Sign up HR",
-                                                                    showConfirmButton: false,
-                                                                    timer: 1500
-                                                                  });
-                                            }
-                                })
-                    }catch(err){
-                                console.log(err);
-                    }
-                    
-                          }
-  
+          
+            const res = await axiosSecure.post('/users', setManager);
+            console.log(res.data);
+            if (res.data.insertedId) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Sign up HR",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                formRef.current.reset();
+                setStartDate(new Date()); 
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
             return (
                        <div>
