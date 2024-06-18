@@ -49,7 +49,8 @@ const JoinManager = () => {
                 password,
                 logo,
                 image: image_url,
-                date
+                date,
+                role:'hr'
             };
 
             console.log(setManager);

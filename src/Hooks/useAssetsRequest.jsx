@@ -9,7 +9,7 @@ const useAssetsRequest = () => {
             const {data:assetsRequest =[],isPending:loading,refetch}=useQuery({
                         queryKey:['assetsRequest'],
                         queryFn:async ()=>{
-                            const res=await axiosPublic.get('/employee')
+                            const res=await axiosPublic.get('/products')
                             return res.data
                         }
                     })

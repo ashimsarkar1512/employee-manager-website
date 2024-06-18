@@ -47,7 +47,8 @@ const JoinEmployee = () => {
                                           email,
                                           password,
                                           date,
-                                          image:image_url
+                                          image:image_url,
+                                          role:'employee'
                                           
                                 }
                                 

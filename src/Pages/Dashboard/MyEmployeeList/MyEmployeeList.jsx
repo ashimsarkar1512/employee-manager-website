@@ -18,22 +18,22 @@ const MyEmployeeList = () => {
        })
 
 
-       const handleMakeHr=user=>{
-              axiosSecure.patch(`users/hr/${user._id}`)
-              .then(res=>{
-                          console.log(res.data);
-                          if(res.data.modifiedCount>0){
-                                      refetch()
-                                      Swal.fire({
-                                                  position: "top-end",
-                                                  icon: "success",
-                                                  title: `${user.name} is an HR now`,
-                                                  showConfirmButton: false,
-                                                  timer: 1500
-                                                });
-                          }
-              })
-       }
+      //  const handleMakeHr=user=>{
+      //         axiosSecure.patch(`users/hr/${user._id}`)
+      //         .then(res=>{
+      //                     console.log(res.data);
+      //                     if(res.data.modifiedCount>0){
+      //                                 refetch()
+      //                                 Swal.fire({
+      //                                             position: "top-end",
+      //                                             icon: "success",
+      //                                             title: `${user.name} is an HR now`,
+      //                                             showConfirmButton: false,
+      //                                             timer: 1500
+      //                                           });
+      //                     }
+      //         })
+      //  }
 
         const handleRemoveUser=user=>{
               Swal.fire({

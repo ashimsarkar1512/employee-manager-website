@@ -1,9 +1,29 @@
-import useAssetsRequest from "../../../Hooks/useAssetsRequest";
+import { useContext } from "react";
+import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
+import { AuthContext } from "../../../Providers/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
+
 
 
 
 const MyRequestAssets = () => {
-       const[assetsRequest]=useAssetsRequest();
+     const axiosSecure=UseAxiosSecure()
+     const { user, loading } =useContext(AuthContext)
+
+     const { data: myAssets = [] } = useQuery({
+       queryKey: ["myAssets", user?.email],
+       enabled: !loading && !!user?.email,
+       queryFn: async () => {
+              console.log("Fetching data for:", user?.email);
+           const { data } = await axiosSecure.get(`/requestAsset/${user?.email}`);
+           return data;
+       },
+   });
+
+ 
+  
+    console.log(myAssets);
+
        return (
               <div>
 
@@ -25,16 +45,16 @@ const MyRequestAssets = () => {
 </thead>
 <tbody>
 {
-assetsRequest.map((item,index)=><tr key={item._id}>
+myAssets.map((item,index)=><tr key={item._id}>
 <td>
               {index+1}
 </td>
 
 
 <td>
-{item.name}
+{item.asset_name}
 </td>
-<td>{item.type}</td>
+<td>{item.asset_type}</td>
 <td>
 
 </td>
