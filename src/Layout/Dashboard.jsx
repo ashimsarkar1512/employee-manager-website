@@ -13,8 +13,19 @@ import { AiOutlineTeam } from "react-icons/ai";
 
 import { MdPostAdd } from "react-icons/md"; 
 import useHr from "../Hooks/useHr";
+import { useContext } from "react";
+import { AuthContext } from "../Providers/AuthProvider";
+import { CiLogout } from "react-icons/ci";
+
 // import { VscRequestChanges } from "react-icons/vsc";
 const Dashboard = () => {
+     const {logOut}=useContext(AuthContext)
+
+     const handleLogout = () => {
+          logOut()
+            .then(() => { })
+            .catch(error => console.log(error))
+        }
      const [isHr]=useHr()
      // const isHr=true
             return (
@@ -68,6 +79,7 @@ const Dashboard = () => {
                                              <div className="divider"></div>
                                                 <li><NavLink to='/'><FaHome></FaHome> Home</NavLink></li>
                                                 <li><NavLink to='/dashboard/profile'><CgProfile></CgProfile> profile</NavLink></li>
+                                              <button className="flex items-center text-xl btn btn-ghost  font-medium my-2" onClick={handleLogout}> <CiLogout></CiLogout>LogOut</button>
                                              </div>
                                                 
 

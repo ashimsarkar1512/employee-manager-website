@@ -1,9 +1,10 @@
+import PendingRequest from "../../../components/PendingRequest/PendingRequest";
 
 
 const EmployeeHome = () => {
             return (
                         <div>
-                              <h2>employee home</h2>      
+                              <PendingRequest></PendingRequest>      
                         </div>
             );
 };

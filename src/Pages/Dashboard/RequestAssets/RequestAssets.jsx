@@ -4,9 +4,10 @@ import useAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import toast from "react-hot-toast";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 const RequestAssets = () => {
-  const [assetsRequest] = useAssetsRequest();
+  const [assetsRequest,] = useAssetsRequest();
   const axiosSecure = useAxiosSecure();
   const {user}=useContext(AuthContext)
   const [selectedAsset, setSelectedAsset] = useState(null);
@@ -22,12 +23,17 @@ const RequestAssets = () => {
     e.preventDefault();
     if (!selectedAsset) return;
 
+
+
+
+
     const requestData = {
+      
       ...selectedAsset,  
       requestNotes,
       status: "pending",
       requestDate: new Date(),
-      requesterEmail: `${user.email}`, 
+      email: `${user.email}`, 
       requesterName: `${user.displayName}`
     };
 
@@ -43,6 +49,7 @@ const RequestAssets = () => {
 
   return (
     <div>
+      <SectionTitle heading='Request for an Asset'></SectionTitle>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

@@ -21,6 +21,7 @@ import RequestAssets from "../Pages/Dashboard/RequestAssets/RequestAssets";
 import MyRequestAssets from "../Pages/Dashboard/MyRequestAssets/MyRequestAssets";
 import MyTeam from "../Pages/Dashboard/MyTeam/MyTeam";
 import Profile from "../Pages/Profile/Profile";
+import EmployeeHome from "../Pages/Dashboard/EmployeeHome/EmployeeHome";
 
 
  export const router = createBrowserRouter([
@@ -86,6 +87,10 @@ import Profile from "../Pages/Profile/Profile";
                   loader:({params})=> fetch(`http://localhost:5000/assets/${params.id}`)
                 },
 
+                {
+                  path:"employeeHome",
+                  element:<EmployeeHome></EmployeeHome>
+                },
                 {
                   path:"requestAssets",
                   element:<RequestAssets></RequestAssets>
