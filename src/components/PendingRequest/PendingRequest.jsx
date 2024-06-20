@@ -3,6 +3,7 @@ import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 import useEmployee from "../../Hooks/useEmployee";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import SectionTitle from "../SectionTitle/SectionTitle";
 
 
 
@@ -46,6 +47,8 @@ const PendingRequest = () => {
           
             return (
                         <div>
+                                <SectionTitle heading='Pending Request'></SectionTitle>
+
                                 <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -58,6 +61,7 @@ const PendingRequest = () => {
               <th>Action</th>
             </tr>
           </thead>
+          <hr/>
           <tbody>
             {pending.map((item, index) => (
               <tr key={item._id}>

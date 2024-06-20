@@ -1,0 +1,26 @@
+/* request.css */
+.pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+          }
+          
+          .pagination button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+          }
+          
+          .pagination button.selected {
+            background-color: #0056b3;
+          }
+          
+          .pagination select {
+            margin-left: 10px;
+            padding: 5px;
+          }
+          

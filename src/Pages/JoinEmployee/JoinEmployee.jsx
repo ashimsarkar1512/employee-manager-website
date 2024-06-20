@@ -9,11 +9,13 @@ import Swal from "sweetalert2";
 import { imageUpload } from "../../api/utils";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
+// import { useNavigate } from "react-router-dom";
 
 
 
 const JoinEmployee = () => {
     const axiosPublic=useAxiosPublic()
+    // const navigate=useNavigate()
 
     const { createUser } = useContext(AuthContext);
     const [startDate, setStartDate] = useState(new Date());
@@ -59,14 +61,16 @@ const JoinEmployee = () => {
             console.log(res.data);
             if (res.data.insertedId) {
                 Swal.fire({
-                    position: "top-end",
+                    position: "center",
                     icon: "success",
                     title: "Sign up Employee",
                     showConfirmButton: false,
                     timer: 1500
                 });
                 formRef.current.reset();
-                setStartDate(new Date()); 
+                setStartDate(new Date());
+                
+                
             }
         } catch (err) {
             console.error(err);

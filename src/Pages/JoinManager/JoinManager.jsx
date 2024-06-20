@@ -62,7 +62,7 @@ const JoinManager = () => {
             console.log(res.data);
             if (res.data.insertedId) {
                 Swal.fire({
-                    position: "top-end",
+                    position: "center",
                     icon: "success",
                     title: "Sign up HR",
                     showConfirmButton: false,

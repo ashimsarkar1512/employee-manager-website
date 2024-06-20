@@ -7,7 +7,7 @@ import { FcDisapprove } from "react-icons/fc";
 
 
 const AllRequest = () => {
-        const [assets]=useAsset()
+        const [requestAssets]=useAsset()
             return (
                 <div>
 
@@ -32,31 +32,31 @@ const AllRequest = () => {
   </thead>
   <tbody>
   {
-  assets.map((item,index)=><tr key={item._id}>
+  requestAssets.map((item,index)=><tr key={item._id}>
   <td>
                 {index+1}
   </td>
   
   
   
-  <td>{item.name}</td>
+  <td>{item.asset_name}</td>
   <td>
-   {item.type}
+   {item.asset_type}
   </td>
   <td>
-
+   {item.email}
   </td>
   <td>
-
+{item.requesterName}
   </td>
   <td>
- {item.date}
+ {item.requestDate}
   </td>
   <td>
-
+  {item.requestNotes}
   </td>
   <td>
-        
+        {item.status}
   </td>
   <td>
  
