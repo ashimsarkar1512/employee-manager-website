@@ -7,13 +7,13 @@ import JoinEmployee from "../Pages/JoinEmployee/JoinEmployee";
 import Register from "../Pages/Register/Register";
 import Dashboard from "../Layout/Dashboard";
 import AddAsset from "../Pages/Dashboard/AddAsset/AddAsset";
-import AllRequest from "../Pages/Dashboard/AllRequest/AllRequest";
+
 
 import MyEmployeeList from "../Pages/Dashboard/MyEmployeeList/MyEmployeeList";
 
 import HrHome from "../Pages/Dashboard/HrHome/HrHome";
 import AssetList from "../Pages/Dashboard/AssetList/AssetList";
-import UpdateAsset from "../Pages/Dashboard/UpdateAsset/UpdateAsset";
+
 import JoinManager from "../Pages/JoinManager/JoinManager";
 import AddEmployee from "../Pages/Dashboard/AddEmployee/AddEmployee";
 import RequestAssets from "../Pages/Dashboard/RequestAssets/RequestAssets";
@@ -23,6 +23,7 @@ import MyTeam from "../Pages/Dashboard/MyTeam/MyTeam";
 import Profile from "../Pages/Profile/Profile";
 import EmployeeHome from "../Pages/Dashboard/EmployeeHome/EmployeeHome";
 import Payment from "../Pages/Dashboard/Payment/Payment";
+import AllRequests from "../Pages/Dashboard/AllRequest/AllRequests";
 
 
  export const router = createBrowserRouter([
@@ -75,7 +76,7 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
                 },
                 {
                   path:'request',
-                  element:<AllRequest></AllRequest> 
+                  element:<AllRequests></AllRequests>
                 },
               
                 {
@@ -86,12 +87,7 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
                   path:'addEmployee',
                   element:<AddEmployee></AddEmployee>  
                 },
-                {
-                  path:'updateAssets/:id',
-                  element:<UpdateAsset></UpdateAsset>,
-                  loader:({params})=> fetch(`https://assignment-12-category-0007-server.vercel.app/assets/${params.id}`)
-                },
-
+               
                 {
                   path:"employeeHome",
                   element:<EmployeeHome></EmployeeHome>

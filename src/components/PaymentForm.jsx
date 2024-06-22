@@ -111,7 +111,7 @@ function PaymentForm() {
               showConfirmButton: false,
               timer: 1500,
             });
-            navigate("/addEmployee");
+            navigate("addEmployee");
           }
         }
       }

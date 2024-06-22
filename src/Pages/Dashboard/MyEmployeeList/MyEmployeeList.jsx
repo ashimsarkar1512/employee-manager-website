@@ -1,171 +1,133 @@
-import { useQuery } from "@tanstack/react-query";
-import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
-import { MdGroupRemove } from "react-icons/md";
-import Swal from "sweetalert2";
-import { FaUser } from "react-icons/fa";
-import { GrUserAdmin } from "react-icons/gr";
+
+import SectionTitle from "../../../components/PrimaryButton";
+import PrimaryButton from "../../../components/PrimaryButton";
+import PageTitle from "../../../components/PageTitle";
+
+
+import useUserData from "../../../Hooks/useUserData";
+
+import useAxiosSecure from "../../../Hooks/UseAxiosSecure";
+import useUsersByCompany from "../../../Hooks/useUsersByCompany";
 import { useState } from "react";
-import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import DataTable from "react-data-table-component";
 
-
-
-
-
-const MyEmployeeList = () => {
-          const axiosSecure=UseAxiosSecure()
-          
-          const [itemsPerPage,setItemPerPage]=useState(5)
-          const [currentPage,setCurrentPage]=useState(0)
-        
-          
-         
-
-       const {data:users=[],refetch}=useQuery({
-           queryKey:['users'], 
-           queryFn:async ()=>{
-              const res=await axiosSecure.get('/users')
-              return res.data
-           }  
-       })
-
-       const  numberOfPages=Math.ceil(users.length/itemsPerPage)
-        
-       const pages=[...Array(numberOfPages).keys()]
-
-    
-
-        const handleRemoveUser=user=>{
-              Swal.fire({
-                     title: "Are you sure?",
-                     text: "You won't be able to revert this!",
-                     icon: "warning",
-                     showCancelButton: true,
-                     confirmButtonColor: "#3085d6",
-                     cancelButtonColor: "#d33",
-                     confirmButtonText: "Yes, delete it!"
-                   }).then((result) => {
-                     if (result.isConfirmed) {
-                 
-                     axiosSecure.delete(`/users/${user._id}`)
-                     .then(res=>{
-                                 if(res.data.deletedCount>0){
-                                             refetch ();
-                                              Swal.fire({
-                                       title: "Deleted!",
-                                       text: "Your file has been deleted.",
-                                       icon: "success"
-                                     });
-                                   }
-                     })
-                     }
-                   });
-        }
-
-
-        const handleItemsPerPage=e=>{
-          const val=parseInt(e.target.value)
-          console.log(val);
-          setItemPerPage(val)
-          setCurrentPage(0)
-        }
-           
-         const handlePrev=()=>{
-          if(currentPage>0){
-            setCurrentPage(currentPage-1)
-          }
-         }
-         const handleNext=()=>{
-          if(currentPage<pages.length-1){
-            setCurrentPage(currentPage+1)
-          }
-         }
-         const startIndex = currentPage * itemsPerPage;
-         const currentItems = users.slice(startIndex, startIndex + itemsPerPage);
-
+function MyEmployeeList() {
+    const { usersByCompany, isLoading, refetch } = useUsersByCompany();
+    const axiosSecure = useAxiosSecure();
+    const [loading, setLoading] = useState(false);
+    const { userData } = useUserData();
+  
+    const handleRemoveUser = async (userId) => {
+      try {
+        setLoading(true);
+        await axiosSecure.patch(`/users/${userId}`);
+        Swal.fire({
+          icon: "success",
+          title: "Employee Removed!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        refetch(); // Refresh the user list
+      } catch (error) {
+        console.error("Error updating user:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+   
+    const columns = [
+      {
+        name: "#", // Column header for serial number
+        cell: (row, index) => <div>{index + 1}</div>, // Render serial number based on row index
+      },
+      {
+        name: "Member Image",
+        selector: (row) => {
+          return (
+            <img
+              src={
+                row?.image
+                  ? row.image
+                  : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/2048px-Missing_avatar.svg.png"
+              }
+              alt="Image"
+              className="h-[100px] w-[100px] object-cover rounded my-2"
+            />
+          );
+        },
+        sortable: true,
+      },
+      {
+        name: "Member Name",
+        selector: (row) => row?.name,
+        sortable: true,
+      },
+      {
+        name: "Member Type",
+        selector: (row) => {
+          return <p className="uppercase">{row.role}</p>;
+        },
+        sortable: true,
+      },
+      {
+        name: "Action",
+        cell: (row) => {
+          if (row.role === "hr") {
+            return "";
+          } else {
             return (
-                        <div>
-                                  <div>
-
-                                    <div className="my-8">
-                                      <SectionTitle heading="My Employee"></SectionTitle>
-                                    </div>
-                                      
-                                      <div className="overflow-x-auto">
-                        <table className="table">
-                        {/* head */}
-                        <thead>
-                        <tr className="text-xl">
-                        
-                        <th>#</th>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Member Type</th>
-                        <th>Remove</th>
-                        
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {
-                        currentItems.map((user,index)=><tr key={user._id}>
-                        <td>
-                                      {index+1}
-                        </td>
-                        
-                        
-                        <td>
-                        <div className="flex items-center gap-3">
-                          
-                        <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                        <img src={user.image} alt="Avatar Tailwind CSS Component" />
-                        </div>
-                        </div>
-                        
-                        </div>
-                        </td>
-                        <td>{user.name}</td>
-                        <td>
-                           {user.role==='hr'?<GrUserAdmin className="text-2xl"></GrUserAdmin>:
-                            <button >
-                            <FaUser className="text-2xl "></FaUser>
-                           </button>}
-                        </td>
-                        <td>
-                          <button onClick={()=>handleRemoveUser(user)} className="btn btn-circle">
-                            <MdGroupRemove className="text-2xl text-red-600"></MdGroupRemove>
-                          </button>
-                        </td>
-                                                                                                  
-                        </tr>
-                        )         
-                        }
-                        
-                        
-                        </tbody>
-                        
-                        
-                        </table>
-                        </div>        
-                                                </div>   
-
-
-                                                <div className="pagination ">
-        <p>currentPage:{currentPage}</p>
-        <button onClick={handlePrev}>prev</button>
-        {
-          pages.map(page=><button className={currentPage===page && 'selected'}
-            onClick={()=>setCurrentPage(page)}
-            key={page}>{page}</button>)
-        }
-        <select value={itemsPerPage} onChange={handleItemsPerPage}  name="" id="">
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-        </select>
-        <button onClick={handleNext}>Next</button>
-      </div>
-                        </div>
+              <div className="py-2 flex justify-center">
+                <button
+                  onClick={() => handleRemoveUser(row._id)}
+                  type="button"
+                  className="p-1 rounded-md bg-red-700 text-white text-base"
+                >
+                  Remove
+                </button>
+              </div>
             );
-};
-
-export default MyEmployeeList;
+          }
+        },
+      },
+    ];
+  
+    return (
+      <section className="py-8">
+        <PageTitle title={"Employee List"} />
+        {!userData?.payment_status ? (
+          <div className="text-center">
+            <p className="text-red-700 font-bold text-xl mb-4">
+              You Have To Pay First
+            </p>
+            <Link to="/payment">
+              <PrimaryButton
+                buttonName={"Go For Payment"}
+                buttonBGColor={"bg-primary"}
+                buttonTextColor={"text-white"}
+              />
+            </Link>
+          </div>
+        ) : (
+          <div className="template-container">
+            <div className="text-center">
+              <SectionTitle sectionTitle={"My Employee List"} />
+              {/* Data Table */}
+              <div className="mt-2">
+                <DataTable
+                  columns={columns}
+                  data={usersByCompany}
+                  pagination
+                  highlightOnHover
+                />
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
+    );
+  }
+  
+  export default MyEmployeeList;

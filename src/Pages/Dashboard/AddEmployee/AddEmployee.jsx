@@ -101,7 +101,7 @@ function AddEmployee() {
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate("/employee-list");
+          navigate("/dashboard/myEmployeeList");
         }
       } catch (error) {
         console.error("Error updating user:", error);

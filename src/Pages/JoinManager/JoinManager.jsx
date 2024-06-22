@@ -29,8 +29,8 @@ const JoinManager = () => {
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
-        const companyName=form.companyName.value;
-        const logo = form.logo.value;
+        const company_name=form.companyName.value;
+        const company_logo= form.logo.value;
         const password = form.password.value;
         const packages = form.packages.value;
         const image = form.image.files[0];
@@ -51,8 +51,8 @@ const JoinManager = () => {
                 name,
                 email,
                 password,
-                companyName,
-                logo,
+              company_logo,
+             company_name,
                 image: image_url,
                 date,
                 packages:packages,

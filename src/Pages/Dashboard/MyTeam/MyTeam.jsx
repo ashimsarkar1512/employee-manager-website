@@ -1,60 +1,76 @@
-import useTeam from "../../../Hooks/useTeam";
 
+import SectionTitle from "../../../components/SectionTitle2";
+import PageTitle from "../../../components/PageTitle";
 
-const MyTeam = () => {
-    const [myTeam]=useTeam()
-            return (
-                        <div>
-                                      
-              <div className="overflow-x-auto">
-<table className="table">
-{/* head */}
-<thead>
-<tr className="text-xl">
+import useUsersByCompany from "../../../Hooks/useUsersByCompany";
+import DataTable from "react-data-table-component";
 
-<th>#</th>
-<th>Image</th>
-<th>Name</th>
-<th>Member Type</th>
-
-</tr>
-</thead>
-<tbody>
-{
-myTeam.map((item,index)=><tr key={item._id}>
-<td>
-              {index+1}
-</td>
-
-
-<td>
-<div className="flex items-center gap-3">
+function MyTeam() {
+    const { usersByCompany, isLoading } = useUsersByCompany();
   
-<div className="avatar">
-<div className="mask mask-squircle w-12 h-12">
-<img src={item.image} alt="Avatar Tailwind CSS Component" />
-</div>
-</div>
-
-</div>
-</td>
-<td>{item.name}</td>
-<td>
-
-</td>
-                                                                          
-</tr>
-)         
-}
-
-
-</tbody>
-
-
-</table>
-</div>        
-                        </div>
-            );
-};
-
-export default MyTeam;
+    if (isLoading) {
+      return (
+        <div className="flex justify-center mt-5">
+       
+        </div>
+      );
+    }
+  
+    const columns = [
+      {
+        name: "#", // Column header for serial number
+        cell: (row, index) => <div>{index + 1}</div>, // Render serial number based on row index
+      },
+      {
+        name: "Member Image",
+        selector: (row) => {
+          return (
+            <img
+              src={
+                row?.profile_image
+                  ? row.profile_image
+                  : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/2048px-Missing_avatar.svg.png"
+              }
+              alt="Image"
+              className="h-[100px] w-[100px] object-cover rounded my-2"
+            />
+          );
+        },
+        sortable: true,
+      },
+      {
+        name: "Member Name",
+        selector: (row) => row?.name,
+        sortable: true,
+      },
+      {
+        name: "Member Type",
+        selector: (row) => {
+          return <p className="capitalize">{row.role}</p>;
+        },
+        sortable: true,
+      },
+    ];
+  
+    return (
+      <section className="py-8">
+        <PageTitle title={"My Team"} />
+        <div className="container mx-auto">
+          <div className="text-center">
+            <SectionTitle sectionTitle={"My Team"} />
+            {/* Data Table */}
+            <div className="mt-2">
+              <DataTable
+                columns={columns}
+                data={usersByCompany}
+                pagination
+                highlightOnHover
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+  
+  export default MyTeam;

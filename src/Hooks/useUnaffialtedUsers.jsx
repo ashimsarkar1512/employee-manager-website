@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import UseAxiosSecure from "./UseAxiosSecure";
 
-
 function useUnaffiliatedUsers() {
     const axiosSecure = UseAxiosSecure();
+    
     const {
       data: unaffiliatedUsers = [],
       isLoading,
@@ -25,4 +25,4 @@ function useUnaffiliatedUsers() {
     return { unaffiliatedUsers, isLoading, refetch, isError, error };
   }
   
-  export default useUnaffiliatedUsers;
+export default useUnaffiliatedUsers;
