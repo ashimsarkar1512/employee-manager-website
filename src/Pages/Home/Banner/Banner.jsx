@@ -18,7 +18,7 @@ const Banner = () => {
                         <div>
                             <img src={img2} />
                             <div className="transform -translate-y-36 left-5 right-5 ">
-                                    <button className="btn text-2xl">Join As HR Manager</button>
+                                   <Link to='/manager'> <button className="btn text-2xl">Join As HR Manager</button></Link>
                            </div>
                            
                          

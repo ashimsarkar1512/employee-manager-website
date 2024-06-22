@@ -6,16 +6,25 @@ import Swal from "sweetalert2";
 
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import {  useEffect, useState } from "react";
-// import useAsset from "../../../Hooks/useAsset"
+import useAsset from "../../../Hooks/useAsset"
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 
 const AssetList = () => {
-      //  const [refetch]=useAsset()
+       const [refetch]=useAsset()
        const [services, setServices] = useState([]);
        const[asc,setAsc]=useState(true)
        const [search,setSearch]=useState('')
        const [filter, setFilter] = useState('');
        console.log(filter);
+       const [itemsPerPage,setItemPerPage]=useState(5)
+  const [currentPage,setCurrentPage]=useState(0)
+
+  
+  const  numberOfPages=Math.ceil(services.length/itemsPerPage)
+
+  const pages=[...Array(numberOfPages).keys()]
+ 
       
       
 
@@ -45,7 +54,7 @@ const AssetList = () => {
                                       const res=await axiosSecure.delete(`/assets/${id}`)
                                       // console.log(res.data);
                                       if(res.data.deletedCount>0){
-                                                //  refetch()
+                                                 refetch()
                                                   Swal.fire({
                                                               position: "top-end",
                                                               icon: "success",
@@ -68,11 +77,34 @@ const AssetList = () => {
 }
 
 
+const handleItemsPerPage=e=>{
+  const val=parseInt(e.target.value)
+  console.log(val);
+  setItemPerPage(val)
+  setCurrentPage(0)
+}
+   
+ const handlePrev=()=>{
+  if(currentPage>0){
+    setCurrentPage(currentPage-1)
+  }
+ }
+ const handleNext=()=>{
+  if(currentPage<pages.length-1){
+    setCurrentPage(currentPage+1)
+  }
+ }
+ const startIndex = currentPage * itemsPerPage;
+ const currentItems = services.slice(startIndex, startIndex + itemsPerPage);
+
+
 
 
             return (
               <div>
+                 <SectionTitle heading='Asset List'></SectionTitle>
                 <div className="flex gap-5 justify-center my-8">
+                 
                   <form onSubmit={handleSearch}>
                     <input className="py-2 border-2" type="text" name="search" />
                     <input type="submit" value="search"className="btn" />
@@ -117,7 +149,7 @@ const AssetList = () => {
 </thead>
 <tbody>
 {
-services.map((item,index)=><tr key={item._id}>
+currentItems.map((item,index)=><tr key={item._id}>
 <td>
               {index+1}
 </td>
@@ -158,6 +190,22 @@ className="btn btn-ghost btn-lg bg-orange-500">
 
 </table>
 </div>
+
+<div className="pagination ">
+        <p>currentPage:{currentPage}</p>
+        <button onClick={handlePrev}>prev</button>
+        {
+          pages.map(page=><button className={currentPage===page && 'selected'}
+            onClick={()=>setCurrentPage(page)}
+            key={page}>{page}</button>)
+        }
+        <select value={itemsPerPage} onChange={handleItemsPerPage}  name="" id="">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+        <button onClick={handleNext}>Next</button>
+      </div>
               
   </div>
             );

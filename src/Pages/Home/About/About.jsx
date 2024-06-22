@@ -12,12 +12,12 @@ const About = () => {
 		<div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
 			<img src="https://i.ibb.co/VvbLcZK/pexels-karolina-grabowska-4491452.jpg" alt="" className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" />
 		</div>
-		<div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
-			<p>
-                                    
-                                    </p>
+    
 			
-			
+    <p>EFFICIENT MANAGEMENT</p>
+		<div className="">
+   
+   
 		</div>
 	</div>
 </section>

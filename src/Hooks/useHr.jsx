@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 const useHr = () => {
             const{user,loading}=useContext(AuthContext);
             const axiosSecure=UseAxiosSecure();
-            const {data:isHr, isPending:isHrLoading}=useQuery({
+            const {data:isHr, isPending:isHrLoading,}=useQuery({
              queryKey:[user?.email,'hr'],
              enabled:!loading,
              queryFn:async()=>{
@@ -15,6 +15,7 @@ const useHr = () => {
              }
             })
             return[isHr,isHrLoading]
+            
 };
 
 export default useHr;

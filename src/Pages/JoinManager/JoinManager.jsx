@@ -9,6 +9,8 @@ import { imageUpload } from "../../api/utils";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
+import Payment from "../Dashboard/Payment/Payment";
+
 
 const JoinManager = () => {
 
@@ -30,6 +32,7 @@ const JoinManager = () => {
         const companyName=form.companyName.value;
         const logo = form.logo.value;
         const password = form.password.value;
+        const packages = form.packages.value;
         const image = form.image.files[0];
         const date = startDate;
 
@@ -52,6 +55,7 @@ const JoinManager = () => {
                 logo,
                 image: image_url,
                 date,
+                packages:packages,
                 role:'hr'
             };
 
@@ -61,6 +65,7 @@ const JoinManager = () => {
             const res = await axiosSecure.post('/users', setManager);
             console.log(res.data);
             if (res.data.insertedId) {
+                
                 Swal.fire({
                     position: "center",
                     icon: "success",
@@ -78,6 +83,10 @@ const JoinManager = () => {
 
             return (
                        <div>
+                             <div className=" ">
+                            
+                             </div>
+
                            <section className=" mt-6 pb-3 w-3/4 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
                            <h2 className="text-4xl font-semibold text-center py-5 dark:text-gray-200">Sign Up for HR Manager</h2>
    
@@ -114,11 +123,11 @@ const JoinManager = () => {
            <label className="label">
                                         <span className="label-text text-gray-700 dark:text-gray-200">Packages</span>
                                     </label>
-                <select className="select  w-full max-w-xs" name="type">
+                <select className="select  w-full max-w-xs" name="packages">
              <option disabled selected>Packages</option>
-                <option> 5 Members for $5</option>
-                    <option> 10 Members for $8</option>
-                    <option> 20 Members for $15</option>
+             <option value="basic">5 Members for $5</option>
+                    <option value="standard">10 Members for $8</option>
+                    <option value="premium">20 Members for $15</option>
                  </select>
             </div>
          
@@ -140,8 +149,11 @@ const JoinManager = () => {
 </section>   
 <div className="text-5xl  justify-center flex ">
                           <SocialLogin></SocialLogin>
+                         
                           
                            </div>
+
+                           
                           
                         </div>
             );

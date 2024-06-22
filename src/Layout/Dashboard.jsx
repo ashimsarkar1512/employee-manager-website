@@ -27,6 +27,7 @@ const Dashboard = () => {
             .catch(error => console.log(error))
         }
      const [isHr]=useHr()
+     console.log(isHr);
      // const isHr=true
             return (
                         <div className="flex ">
@@ -36,6 +37,8 @@ const Dashboard = () => {
 
                                         {
                                              isHr?<>
+
+                                             <img className="w-10 rounded-full" src={isHr.companyLogo} alt="" />
                                                    <li className="text-xl">
                                            <NavLink to='/dashboard/home'> <IoMdHome></IoMdHome>HR Home</NavLink>
                                                 </li>

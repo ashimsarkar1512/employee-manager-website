@@ -4,11 +4,22 @@ import { MdGroupRemove } from "react-icons/md";
 import Swal from "sweetalert2";
 import { FaUser } from "react-icons/fa";
 import { GrUserAdmin } from "react-icons/gr";
+import { useState } from "react";
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+
+
 
 
 
 const MyEmployeeList = () => {
           const axiosSecure=UseAxiosSecure()
+          
+          const [itemsPerPage,setItemPerPage]=useState(5)
+          const [currentPage,setCurrentPage]=useState(0)
+        
+          
+         
+
        const {data:users=[],refetch}=useQuery({
            queryKey:['users'], 
            queryFn:async ()=>{
@@ -17,23 +28,11 @@ const MyEmployeeList = () => {
            }  
        })
 
+       const  numberOfPages=Math.ceil(users.length/itemsPerPage)
+        
+       const pages=[...Array(numberOfPages).keys()]
 
-      //  const handleMakeHr=user=>{
-      //         axiosSecure.patch(`users/hr/${user._id}`)
-      //         .then(res=>{
-      //                     console.log(res.data);
-      //                     if(res.data.modifiedCount>0){
-      //                                 refetch()
-      //                                 Swal.fire({
-      //                                             position: "top-end",
-      //                                             icon: "success",
-      //                                             title: `${user.name} is an HR now`,
-      //                                             showConfirmButton: false,
-      //                                             timer: 1500
-      //                                           });
-      //                     }
-      //         })
-      //  }
+    
 
         const handleRemoveUser=user=>{
               Swal.fire({
@@ -63,9 +62,33 @@ const MyEmployeeList = () => {
         }
 
 
+        const handleItemsPerPage=e=>{
+          const val=parseInt(e.target.value)
+          console.log(val);
+          setItemPerPage(val)
+          setCurrentPage(0)
+        }
+           
+         const handlePrev=()=>{
+          if(currentPage>0){
+            setCurrentPage(currentPage-1)
+          }
+         }
+         const handleNext=()=>{
+          if(currentPage<pages.length-1){
+            setCurrentPage(currentPage+1)
+          }
+         }
+         const startIndex = currentPage * itemsPerPage;
+         const currentItems = users.slice(startIndex, startIndex + itemsPerPage);
+
             return (
                         <div>
                                   <div>
+
+                                    <div className="my-8">
+                                      <SectionTitle heading="My Employee"></SectionTitle>
+                                    </div>
                                       
                                       <div className="overflow-x-auto">
                         <table className="table">
@@ -83,7 +106,7 @@ const MyEmployeeList = () => {
                         </thead>
                         <tbody>
                         {
-                        users.map((user,index)=><tr key={user._id}>
+                        currentItems.map((user,index)=><tr key={user._id}>
                         <td>
                                       {index+1}
                         </td>
@@ -103,7 +126,7 @@ const MyEmployeeList = () => {
                         <td>{user.name}</td>
                         <td>
                            {user.role==='hr'?<GrUserAdmin className="text-2xl"></GrUserAdmin>:
-                            <button onClick={()=>handleMakeHr(user)}>
+                            <button >
                             <FaUser className="text-2xl "></FaUser>
                            </button>}
                         </td>
@@ -124,6 +147,23 @@ const MyEmployeeList = () => {
                         </table>
                         </div>        
                                                 </div>   
+
+
+                                                <div className="pagination ">
+        <p>currentPage:{currentPage}</p>
+        <button onClick={handlePrev}>prev</button>
+        {
+          pages.map(page=><button className={currentPage===page && 'selected'}
+            onClick={()=>setCurrentPage(page)}
+            key={page}>{page}</button>)
+        }
+        <select value={itemsPerPage} onChange={handleItemsPerPage}  name="" id="">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+        <button onClick={handleNext}>Next</button>
+      </div>
                         </div>
             );
 };

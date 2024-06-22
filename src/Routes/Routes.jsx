@@ -22,6 +22,7 @@ import MyRequestAssets from "../Pages/Dashboard/MyRequestAssets/MyRequestAssets"
 import MyTeam from "../Pages/Dashboard/MyTeam/MyTeam";
 import Profile from "../Pages/Profile/Profile";
 import EmployeeHome from "../Pages/Dashboard/EmployeeHome/EmployeeHome";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 
 
  export const router = createBrowserRouter([
@@ -49,6 +50,10 @@ import EmployeeHome from "../Pages/Dashboard/EmployeeHome/EmployeeHome";
                          {
                           path:'/manager',
                           element:<JoinManager></JoinManager>
+                         },
+                         {
+                            path:"/payment",
+                            element:<Payment></Payment>
                          }
               ]
             },
@@ -84,7 +89,7 @@ import EmployeeHome from "../Pages/Dashboard/EmployeeHome/EmployeeHome";
                 {
                   path:'updateAssets/:id',
                   element:<UpdateAsset></UpdateAsset>,
-                  loader:({params})=> fetch(`http://localhost:5000/assets/${params.id}`)
+                  loader:({params})=> fetch(`https://assignment-12-category-0007-server.vercel.app/assets/${params.id}`)
                 },
 
                 {

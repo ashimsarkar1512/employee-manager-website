@@ -15,7 +15,9 @@ const Navbar = () => {
              <li ><NavLink  className={({ isActive }) => (isActive ? 'text-xl text-orange-500 font-medium' : 'text-xl')} to='/'>Home</NavLink></li>
              <li ><NavLink  className={({ isActive }) => (isActive ? 'text-xl text-orange-500 font-medium' : 'text-xl')} to='/employee'>Join Us Employee</NavLink></li>
              <li ><NavLink  className={({ isActive }) => (isActive ? 'text-xl text-orange-500 font-medium' : 'text-xl')} to='/manager'>Join Us HR Manager</NavLink></li>
-             <li ><NavLink  className={({ isActive }) => (isActive ? 'text-xl text-orange-500 font-medium' : 'text-xl')} to='dashboard'>Navbar</NavLink></li>
+            {
+              user? <li ><NavLink  className={({ isActive }) => (isActive ? 'text-xl text-orange-500 font-medium' : 'text-xl')} to='dashboard'>dashboard</NavLink></li>:""
+            }
 
              
             </>
@@ -32,7 +34,10 @@ const Navbar = () => {
                                }
                             </ul>
                           </div>
-                          <a className="btn btn-ghost text-xl">daisyUI</a>
+                          <a className="btn btn-ghost text-xl">
+                            <img className="w-10 rounded-full" src="https://i.ibb.co/Wff1shd/download-1.jpg" alt="" /> 
+                            <p>Trinet</p>
+                          </a>
                         </div>
                         <div className="navbar-center hidden lg:flex">
                           <ul className="menu menu-horizontal px-1">

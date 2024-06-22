@@ -31,20 +31,7 @@ const PendingRequest = () => {
 
 
 
-            // // Use useQuery to fetch assets with status 'pending'
-            // const { data: pending = [], isLoading, error } = useQuery({
-            //   queryKey: ['pending'],
-            //   queryFn: async () => {
-            //     const res = await axiosSecure.get('/requestAsset/pending');
-            //     return res.data;
-            //   }
-            // });
-          
-            // if (isLoading) return <div>Loading...</div>;
-            // if (error) return <div>Error: {error.message}</div>;
-          
-            // console.log(pending);
-          
+            
             return (
                         <div>
                                 <SectionTitle heading='Pending Request'></SectionTitle>
