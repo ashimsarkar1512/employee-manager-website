@@ -41,7 +41,7 @@ function AllRequests() {
             }
 
             const response = await axiosSecure.put(
-                `/requestAssets/${row._id}`,
+                `/requestAsset/${row._id}`,
                 updateData
             );
             if (response.data.modifiedCount > 0) {

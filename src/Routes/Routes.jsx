@@ -26,12 +26,14 @@ import AllRequests from "../Pages/Dashboard/AllRequest/AllRequests";
 import JoinAsHR from "../Pages/JoinAsHR/JoinAsHR";
 import JoinAsEmployee from "../Pages/JoinAsEmployee/JoinAsEmployee";
 import IncreaseLimit from "../Pages/IncreaseLimit/IncreaseLimit";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 
  export const router = createBrowserRouter([
             {
               path: "/",
               element: <Main></Main>,
+              errorElement:<ErrorPage></ErrorPage>,
             children:[
                         {
                                     path:'/',
