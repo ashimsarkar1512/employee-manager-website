@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 import { FaEye, FaEyeSlash } from "react-icons/fa"; 
@@ -11,8 +11,7 @@ const Login = () => {
 
 
   const navigate=useNavigate()
-  const location=useLocation()
-  let from = location.state?.from?.pathname || "/";
+  
 
 
             const [showPassword,setShowPassword]=useState(false);
@@ -49,7 +48,7 @@ const Login = () => {
                                   `
                                 }
                               });
-                              navigate(from, { replace: true });
+                              navigate('/');
                             
                   })
                   

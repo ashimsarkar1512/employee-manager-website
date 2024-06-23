@@ -3,14 +3,13 @@ import PrimaryButton from "../../components/PrimaryButton";
 import DefaultInput from "../../components/DefaultInput";
 import DefaultLabel from "../../components/DefaultLabel";
 import PageTitle from "../../components/PageTitle";
-import SectionTitle from "../../components/SectionTitle2"
+import SectionTitle from "../../components/SectionTitle2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import axios from "axios";
-
 
 function JoinAsHR() {
   const navigate = useNavigate();
@@ -31,10 +30,8 @@ function JoinAsHR() {
     let company_name = form.company_name.value.replace(/\s+/g, "");
     const packages = form.packages.value;
     const image = form.image.files[0];
-    // const formData = new FormData();
-    // formData.append("image", image);
     let formData = new FormData();
-
+  
     // Image Size Validation
     if (image && image.size <= 1000 * 1024) {
       formData.append("image", image);
@@ -47,53 +44,57 @@ function JoinAsHR() {
       setFormLoading(false);
       return;
     }
-
-    // Validation
+  
+    // Password Validation
     if (password.length < 6) {
       Swal.fire({
         icon: "error",
         title: "Please Enter A Password Of At Least 6 Characters",
       });
+      setFormLoading(false);
       return;
     } else if (!/[A-Z]/.test(password)) {
       Swal.fire({
         icon: "error",
         title: "Please Enter A Password Of At Least 1 Uppercase Character",
       });
+      setFormLoading(false);
       return;
     } else if (!/[a-z]/.test(password)) {
       Swal.fire({
         icon: "error",
         title: "Please Enter A Password Of At Least 1 Lowercase Character",
       });
+      setFormLoading(false);
       return;
     }
+  
     company_name = company_name.toLowerCase();
+  
     try {
       const { data } = await axios.post(
-        `https://api.imgbb.com/1/upload?key=${
-          import.meta.env.VITE_IMAGE_HOSTING_KEY
-        }`,
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`,
         formData
       );
+  
       const usersInfo = {
-        name: name,
-        email: email,
-        password: password,
+        name,
+        email,
+        password,
         company_logo: data.data.display_url,
-        dob: dob,
-        company_name: company_name,
-        packages: packages,
+        dob,
+        company_name,
+        packages,
         role: "hr",
         payment_status: false,
       };
+  
       const { data: users } = await axiosPublic.post("/users", usersInfo);
+  
       if (users.insertedId) {
         await createUser(email, password);
         await updateUserProfile(name);
-        setUser((prevUser) => {
-          return { ...prevUser, displayName: name };
-        });
+        setUser((prevUser) => ({ ...prevUser, displayName: name }));
         Swal.fire({
           icon: "success",
           title: "HR Created!",
@@ -111,16 +112,19 @@ function JoinAsHR() {
     } catch (error) {
       setFormLoading(false);
       const errorMessage = error.message
-        .split("/")[1]
-        .replace(/\)\./g, "")
-        .replace(/-/g, " ")
-        .replace(/\b\w/g, (char) => char.toUpperCase());
+        ? error.message
+            .split("/")[1]
+            .replace(/\)\./g, "")
+            .replace(/-/g, " ")
+            .replace(/\b\w/g, (char) => char.toUpperCase())
+        : "An error occurred";
       Swal.fire({
         icon: "error",
         title: `${errorMessage}`,
       });
     }
   };
+  
 
   return (
     <>

@@ -1,12 +1,14 @@
-import MonthlyReq from "../../../components/MonthlyReq/MonthlyReq";
-import PendingRequest from "../../../components/PendingRequest/PendingRequest";
+
+import MonthlyRequests from "../../../components/MonthlyRequests";
+import PendingRequests from "../../../components/PendingRequests";
+
 
 
 const EmployeeHome = () => {
             return (
                         <div>
-                              <PendingRequest></PendingRequest>   
-                              <MonthlyReq></MonthlyReq>   
+                              <PendingRequests></PendingRequests>
+                              <MonthlyRequests></MonthlyRequests> 
                         </div>
             );
 };
