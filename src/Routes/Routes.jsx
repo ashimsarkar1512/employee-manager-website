@@ -25,6 +25,7 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
 import AllRequests from "../Pages/Dashboard/AllRequest/AllRequests";
 import JoinAsHR from "../Pages/JoinAsHR/JoinAsHR";
 import JoinAsEmployee from "../Pages/JoinAsEmployee/JoinAsEmployee";
+import IncreaseLimit from "../Pages/IncreaseLimit/IncreaseLimit";
 
 
  export const router = createBrowserRouter([
@@ -56,7 +57,8 @@ import JoinAsEmployee from "../Pages/JoinAsEmployee/JoinAsEmployee";
                          {
                             path:"/payment",
                             element:<Payment></Payment>
-                         }
+                         },
+                        
               ]
             },
             {
@@ -108,7 +110,11 @@ import JoinAsEmployee from "../Pages/JoinAsEmployee/JoinAsEmployee";
                 {
                   path:"profile",
                   element:<Profile></Profile>
-                }
+                },
+                {
+                  path:"increaseLimit",
+                  element:<IncreaseLimit></IncreaseLimit>
+                 }
               
               ]
             }

@@ -71,7 +71,7 @@ function AddEmployee() {
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate("/employee-list");
+          navigate("/dashboard/increaseLimit");
         }
       } catch (error) {
         console.error("Error updating users:", error);
