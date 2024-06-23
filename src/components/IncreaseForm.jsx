@@ -135,13 +135,7 @@ function IncreaseForm() {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center mt-5">
-        {/* <Spinner /> */}
-      </div>
-    );
-  }
+ 
 
   return (
     <form onSubmit={handleSubmit}>

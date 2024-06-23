@@ -9,7 +9,7 @@ import { useState } from "react";
 import useUserData from "../../../Hooks/useUserData";
 import { Link } from "react-router-dom";
 
-function AllRequests() {
+function AllRequests() {  
     const { userData } = useUserData();
     const [searchTerm, setSearchTerm] = useState("");
     const { requestedAssets, refetch, isLoading } = useRequestedAssets();

@@ -19,7 +19,7 @@ function useFilteredRequestedAssets() {
         const params = {
           email,
         };
-        const response = await axiosSecure.get("/filtered-requestAssets", {
+        const response = await axiosSecure.get("/filtered-requestAsset", {
           params,
         });
         return response.data;

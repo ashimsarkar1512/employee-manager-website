@@ -102,7 +102,7 @@ function RequestAsset() {
   
       try {
         const response = await axiosSecure.post(
-          "/requestAssets",
+          "/requestAsset",
           requestAssetInfo
         );
         if (response.data.insertedId) {
@@ -113,7 +113,7 @@ function RequestAsset() {
             timer: 1500,
           });
           refetch();
-          navigate("/my-assets");
+          navigate("/myAssets");
         }
       } catch (error) {
         const errorMessage = error.message;
@@ -131,12 +131,12 @@ function RequestAsset() {
       },
       {
         name: "Asset Name",
-        selector: (row) => row?.name,
+        selector: (row) => row?.product_name,
         sortable: true,
       },
       {
         name: "Asset Type",
-        selector: (row) => row?.type,
+        selector: (row) => row?.product_type,
         sortable: true,
       },
       {

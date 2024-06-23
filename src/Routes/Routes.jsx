@@ -2,7 +2,7 @@ import { createBrowserRouter, } from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
-import JoinEmployee from "../Pages/JoinEmployee/JoinEmployee";
+
 
 import Register from "../Pages/Register/Register";
 import Dashboard from "../Layout/Dashboard";
@@ -14,7 +14,6 @@ import MyEmployeeList from "../Pages/Dashboard/MyEmployeeList/MyEmployeeList";
 import HrHome from "../Pages/Dashboard/HrHome/HrHome";
 import AssetList from "../Pages/Dashboard/AssetList/AssetList";
 
-import JoinManager from "../Pages/JoinManager/JoinManager";
 import AddEmployee from "../Pages/Dashboard/AddEmployee/AddEmployee";
 import RequestAssets from "../Pages/Dashboard/RequestAssets/RequestAssets";
 
@@ -24,6 +23,8 @@ import Profile from "../Pages/Profile/Profile";
 import EmployeeHome from "../Pages/Dashboard/EmployeeHome/EmployeeHome";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import AllRequests from "../Pages/Dashboard/AllRequest/AllRequests";
+import JoinAsHR from "../Pages/JoinAsHR/JoinAsHR";
+import JoinAsEmployee from "../Pages/JoinAsEmployee/JoinAsEmployee";
 
 
  export const router = createBrowserRouter([
@@ -46,11 +47,11 @@ import AllRequests from "../Pages/Dashboard/AllRequest/AllRequests";
                          },
                          {
                           path:'/employee',
-                          element:<JoinEmployee></JoinEmployee>
+                          element:<JoinAsEmployee></JoinAsEmployee>
                          },
                          {
                           path:'/manager',
-                          element:<JoinManager></JoinManager>
+                          element:<JoinAsHR></JoinAsHR>
                          },
                          {
                             path:"/payment",
