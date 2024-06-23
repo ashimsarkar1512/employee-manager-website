@@ -113,7 +113,7 @@ function RequestAsset() {
             timer: 1500,
           });
           refetch();
-          navigate("/myAssets");
+          navigate("/dashboard/myAssets");
         }
       } catch (error) {
         const errorMessage = error.message;

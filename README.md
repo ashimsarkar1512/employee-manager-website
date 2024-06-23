@@ -1,8 +1,12 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+website-12-category-0007
 
-Currently, two official plugins are available:
+live Link:assignment-12-category-7.web.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Featured and characteristics
+
+*  At first user can see the home page in this website.
+
+* in this website 1 navbar and one dash board navbar 
+
+*
