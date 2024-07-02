@@ -18,4 +18,6 @@ Featured and characteristics
 * pending and monthly request show the employee dash 
 
 Technology used:
+<br/>
+
 javascript,React,tailwind,daisyuI,html,css,mongodb,express.js,node.js,firebase,vercel
