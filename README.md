@@ -5,6 +5,10 @@ live Link:assignment-12-category-7.web.app
 <br/>
 server Link:https://github.com/ashimsarkar1512/employee-manager-website-server
 
+OverView:
+<br/>
+Users initially see the home page with a navbar linking to Employee Register, HR Register, and Login pages, with an additional dashboard route visible post-login. New HRs are redirected to a payment page after registration, then to their dashboard to add assets for employees. HRs manage employee requests for assets, setting them as pending or approved, with employees viewing these requests on their dashboard.
+
 Featured and characteristics
 
 *  At first user can see the home page in this website.
