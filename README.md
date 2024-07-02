@@ -25,3 +25,18 @@ Technology used:
 <br/>
 
 javascript,React,tailwind,daisyuI,html,css,mongodb,express.js,node.js,firebase,vercel
+
+If someone wants to clone a project and run it locally, please follow these steps:
+<br/>
+*Clone the project
+git clone https://github.com/username/repository-name.git
+
+* Navigate to the project directory
+cd repository-name
+
+* Install dependencies
+npm install
+
+* Start the project
+npm start/npm run dev
+
