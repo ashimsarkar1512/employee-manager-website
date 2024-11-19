@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { IoMdHome } from "react-icons/io";
 import { FaTableList } from "react-icons/fa6";
 import { MdAssignmentAdd } from "react-icons/md";
@@ -13,9 +13,12 @@ import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import { CiLogout } from "react-icons/ci";
 import useAnHR from "../Hooks/UseAnHR";
+import useUserData from "../Hooks/useUserData";
+
 
 const Dashboard = () => {
     const { logOut } = useContext(AuthContext);
+    const { userData } = useUserData();
 
     const handleLogout = () => {
         logOut()
@@ -31,7 +34,25 @@ const Dashboard = () => {
 
     return (
         <div className="flex">
+            
+            
             <div className="w-72 min-h-screen bg-orange-400">
+
+           <div className="pl-10">
+           {userData?.company_logo ? (
+            <Link to="/">
+              <img
+                src={userData.company_logo}
+                alt="Logo"
+                className="h-12 w-12 rounded-full"
+              />
+            </Link>
+          ) : (
+            <Link to="/" className="logo">
+              <h1 className="uppercase text-black text-xl">TRINet</h1>
+            </Link>
+          )}
+           </div>
                 <ul className="menu">
                     {
                         isHR ? <>

@@ -1,17 +1,5 @@
-// import { useForm } from "react-hook-form";
-// import SocialLogin from "../../components/SocialLogin";
-// import { Link, useNavigate } from "react-router-dom";
-// import { useContext } from "react";
-// import { AuthContext } from "../../providers/AuthProvider";
-// import useAxiosPublic from "../../hooks/useAxiosPublic";
-// import Swal from "sweetalert2";
-
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-
-
-
 import PageTitle from "../../components/PageTitle";
-
 import PrimaryButton from "../../components/PrimaryButton";
 import DefaultInput from "../../components/DefaultInput";
 import DefaultLabel from "../../components/DefaultLabel";
@@ -22,8 +10,6 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { updateProfile } from "firebase/auth";
 import { FaGoogle } from "react-icons/fa";
-
-
 
 function JoinAsEmployee() {
   const navigate = useNavigate();
@@ -136,9 +122,9 @@ function JoinAsEmployee() {
   return (
     <>
       <PageTitle title={"Join As Employee"} />
-      <section className="template-container py-6">
-        <div className="mx-auto text-center w-full lg:w-2/6 md:w-3/6">
-          <div>
+      <section className="template-container py-6 h-screen flex justify-center items-center">
+        <div className="flex items-center justify-center w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
+          <div className="w-full">
             <SectionTitle sectionTitle={"Join As Employee"} />
             <form onSubmit={handleCreateUser} className="md:px-0 px-2 pb-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
@@ -167,7 +153,7 @@ function JoinAsEmployee() {
                   />
                 </div>
                 <div>
-                  <DefaultLabel labelName={"Data Of Birth"} />
+                  <DefaultLabel labelName={"Date Of Birth"} />
                   <DefaultInput inputType={"date"} inputName={"dob"} />
                 </div>
               </div>
@@ -176,13 +162,13 @@ function JoinAsEmployee() {
                   buttonType={"submit"}
                   buttonName={"Signup"}
                   buttonTextColor={"text-white"}
-                  buttonBGColor={"bg-primary"}
+                  buttonBGColor={"bg-green-600"}
                 />
               </div>
             </form>
             <p className="mb-1 font-roboto text-center text-lg">Or Signup With Google</p>
             <span onClick={handleCreateUserByGoogle}>
-              <FaGoogle></FaGoogle>
+              <FaGoogle className= " text-2xl text-green-600 cursor-pointer" />
             </span>
           </div>
         </div>

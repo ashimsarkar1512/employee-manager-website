@@ -6,11 +6,11 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const SocialLogin = () => {
 
-            const {googleLogin}=useContext(AuthContext)
+            const {signInWithGoogle}=useContext(AuthContext)
             const axiosPublic=useAxiosPublic();
             const navigate=useNavigate()
             const handleGoogleLogin=()=>{
-                        googleLogin()
+              signInWithGoogle()
                         .then(result=>{
                                     console.log(result.user);
                                     const userInfo={

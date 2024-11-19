@@ -1,4 +1,3 @@
-
 import PrimaryButton from "../../components/PrimaryButton";
 import DefaultInput from "../../components/DefaultInput";
 import DefaultLabel from "../../components/DefaultLabel";
@@ -124,23 +123,21 @@ function JoinAsHR() {
       });
     }
   };
-  
 
   return (
     <>
       <PageTitle title={"Join As HR Manager"} />
-      <section className="template-container py-6">
-        <div className="mx-auto text-center w-full lg:w-3/6 md:w-4/6">
-          <div>
+      <section className="template-container mt-8 h-screen flex justify-center items-center">
+        <div className="flex items-center justify-center w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
+          <div className="w-full">
             <SectionTitle sectionTitle={"Join As HR Manager"} />
-            {loading ||
-              (formLoading && isImageValidated && (
-                <p className="text-center text-red-600 text-3xl my-2">
-                  Please wait...
-                </p>
-              ))}
-            <form onSubmit={handleCreateUser} className="md:px-0 px-2">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            {loading || (formLoading && isImageValidated && (
+              <p className="text-center text-red-600 text-3xl my-2">
+                Please wait...
+              </p>
+            ))}
+            <form onSubmit={handleCreateUser} className="md:px-0 px-2 pb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
                 <div>
                   <DefaultLabel labelName={"Full Name"} />
                   <DefaultInput
@@ -202,22 +199,23 @@ function JoinAsHR() {
                       type="file"
                       name="image"
                       className="block w-full text-sm text-slate-500
-      file:mr-4 file:py-2 file:px-4
-      file:rounded-full file:border-0
-      file:text-sm file:font-semibold
-      file:bg-blue-50 file:text-primary
-      hover:file:bg-blue-100
-    "
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-full file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-blue-50 file:text-primary
+                        hover:file:bg-blue-100"
                     />
                   </label>
                 </div>
               </div>
-              <PrimaryButton
-                buttonType={"submit"}
-                buttonName={"SignUp"}
-                buttonTextColor={"text-white"}
-                buttonBGColor={"bg-primary"}
-              />
+              <div className="flex justify-center items-center gap-3 flex-wrap">
+                <PrimaryButton
+                  buttonType={"submit"}
+                  buttonName={"SignUp"}
+                  buttonTextColor={"text-white"}
+                  buttonBGColor={"bg-green-600"}
+                />
+              </div>
             </form>
           </div>
         </div>
