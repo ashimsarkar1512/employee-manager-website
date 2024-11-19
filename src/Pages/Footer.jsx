@@ -19,7 +19,7 @@ const Footer = () => {
             className="w-10 h-10 rounded-full"
           />
           <span className="font-roboto uppercase tracking-wide">
-            Tri<span className="text-primary font-lato">n</span>et Software Ltd.
+            Tri<span className="text-primary font-lato">N</span>et Software Ltd.
           </span>
         </div>
 
