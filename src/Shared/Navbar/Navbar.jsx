@@ -30,8 +30,8 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "text-base text-orange-500 font-medium"
-              : "text-base text-black hover:text-orange-400"
+              ? "text-base font-medium text-black"
+              : "text-base text-black hover:text-green-500"
           }
         >
           Home
@@ -42,8 +42,8 @@ const Navbar = () => {
           to="/employee"
           className={({ isActive }) =>
             isActive
-              ? "text-base text-orange-500 font-medium"
-              : "text-base text-black hover:text-orange-400"
+              ? "text-base font-medium text-black"
+              : "text-base text-black hover:text-green-500"
           }
         >
           Join as Employee
@@ -54,8 +54,8 @@ const Navbar = () => {
           to="/manager"
           className={({ isActive }) =>
             isActive
-              ? "text-base text-orange-500 font-medium"
-              : "text-base text-black hover:text-orange-400"
+              ? "text-base font-medium text-black"
+              : "text-base text-black hover:text-green-500"
           }
         >
           Join as HR Manager
@@ -67,8 +67,8 @@ const Navbar = () => {
             to="/dashboard"
             className={({ isActive }) =>
               isActive
-                ? "text-base text-orange-500 font-medium"
-                : "text-base text-black hover:text-orange-400"
+                ? "text-base font-medium text-black"
+                : "text-base text-black hover:text-green-500"
             }
           >
             Dashboard
@@ -88,11 +88,7 @@ const Navbar = () => {
         {/* Navbar Start */}
         <div className="navbar-start">
           <div className="dropdown">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost lg:hidden"
-            >
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -121,7 +117,7 @@ const Navbar = () => {
               alt="Logo"
               className="w-8 h-8 rounded-full"
             />
-            <span>Trinet</span>
+            <span className="text-black">Trinet</span>
           </Link>
         </div>
 
@@ -164,7 +160,7 @@ const Navbar = () => {
             </div>
           ) : (
             <Link to="/login">
-              <button className="px-4 py-2 rounded-md border bg-white text-black text-sm">
+              <button className="px-4 py-2 rounded-md border text-black text-sm hover:text-green-500">
                 Login
               </button>
             </Link>
