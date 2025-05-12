@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link,  NavLink, Outlet, useNavigate } from "react-router-dom";
 import { IoMdHome } from "react-icons/io";
 import { FaTableList } from "react-icons/fa6";
 import { MdAssignmentAdd } from "react-icons/md";
@@ -19,10 +19,13 @@ import useUserData from "../Hooks/useUserData";
 const Dashboard = () => {
     const { logOut } = useContext(AuthContext);
     const { userData } = useUserData();
+    const navigate = useNavigate(); 
 
     const handleLogout = () => {
         logOut()
-            .then(() => { })
+            .then(() => {
+                navigate('/');
+             })
             .catch(error => console.log(error));
     };
 
