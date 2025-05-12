@@ -31,7 +31,7 @@ const SocialLogin = () => {
             return (
                         <div className="p-6">
                         
-               <button onClick={handleGoogleLogin} className="btn">
+               <button  onClick={handleGoogleLogin} className="btn  ">
 <FcGoogle></FcGoogle>
                  Google          
                </button>   

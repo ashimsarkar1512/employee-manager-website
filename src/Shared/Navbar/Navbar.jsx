@@ -1,20 +1,23 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [scrolled, setScrolled] = useState(false);
+  const navigate=useNavigate()
 
-  const handleLogout = () => {
+   const handleLogout = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        navigate("/"); // Redirect to home after logout
+      })
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50); // Adjust scrolling effect
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -61,20 +64,6 @@ const Navbar = () => {
           Join as HR Manager
         </NavLink>
       </li>
-      {user && (
-        <li>
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              isActive
-                ? "text-base font-medium text-black"
-                : "text-base text-black hover:text-green-500"
-            }
-          >
-            Dashboard
-          </NavLink>
-        </li>
-      )}
     </>
   );
 
@@ -148,6 +137,9 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content mt-3 z-[1] bg-white text-black p-2 shadow rounded-box w-52"
               >
                 <li className="text-center font-medium">{user?.displayName}</li>
+                <li>
+                  <Link to="/dashboard">Dashboard</Link>
+                </li>
                 <li>
                   <button
                     onClick={handleLogout}

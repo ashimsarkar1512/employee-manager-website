@@ -122,7 +122,7 @@ function JoinAsEmployee() {
   return (
     <>
       <PageTitle title={"Join As Employee"} />
-      <section className="template-container py-6 h-screen flex justify-center items-center">
+      <section className="template-container mt-5 py-6 h-screen flex justify-center items-center">
         <div className="flex items-center justify-center w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
           <div className="w-full">
             <SectionTitle sectionTitle={"Join As Employee"} />
@@ -167,9 +167,15 @@ function JoinAsEmployee() {
               </div>
             </form>
             <p className="mb-1 font-roboto text-center text-lg">Or Signup With Google</p>
-            <span onClick={handleCreateUserByGoogle}>
-              <FaGoogle className= " text-2xl text-green-600 cursor-pointer" />
-            </span>
+            <div className="flex justify-center">
+              <button
+                onClick={handleCreateUserByGoogle}
+                className="flex  mt-5 items-center justify-center bg-white border border-gray-300 rounded-md shadow-md p-2 w-1/3 hover:bg-gray-100"
+              >
+                <FaGoogle className="text-xl text-green-600 mr-2" />
+                <span className="text-sm font-medium">Sign Up with Google</span>
+              </button>
+            </div>
           </div>
         </div>
       </section>

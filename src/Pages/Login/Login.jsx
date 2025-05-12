@@ -80,7 +80,8 @@ const Login = () => {
           <div className="text-5xl flex ml-20 lg:ml-44">
             <SocialLogin />
           </div>
-          <h1 className="font-medium text-center mt-5">
+          
+          <h1 className="font-medium text-center ">
             Do not have an account?{" "}
             <Link className="text-blue-500 font-semibold" to="/register">
               Register
