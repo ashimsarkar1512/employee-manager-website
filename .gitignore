@@ -7,9 +7,14 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+
+# Build outputs
 dist
 dist-ssr
+
+# Local env files
 *.local
 
 # Editor directories and files
@@ -17,11 +22,13 @@ dist-ssr
 !.vscode/extensions.json
 .idea
 .DS_Store
+
+# Windows / VS files
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-config.bat
 temp_auto_push.bat
 temp_interactive_push.bat
+config.bat
